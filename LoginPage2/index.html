@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Login Page</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Login Page</title>
+  <style>
+      body {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          background-color: #f0f0f0;
+      }
+
+      #password {
+          padding: 10px;
+          font-size: 1.2em;
+      }
+
+      #go {
+          margin-left: 10px;
+          padding: 10px;
+          font-size: 1.2em;
+      }
+  </style>
+  <script>
+
+
+    const generatePassword = () => {
+      const currentTime = new Date();
+      const hours = currentTime.getHours();
+      const minutes = currentTime.getMinutes();
+
+      // Base64 encoded existing values
+      const existingValues = ["MTA=", "MjA=", "MzA=", "NDA="];
+
+      // Combine the current time with existing values
+      const combinedValues = existingValues.map(value => {
+        const decodedValue = parseInt(atob(value), 10); // Decode the Base64 value to decimal
+        return (decodedValue + hours + minutes).toString(); // Add hours and minutes, then convert to string
+      });
+
+      // Create the password by concatenating the values
+      const password = combinedValues.join("");
+
+      return password;
+    };
+
+    const checkPassword = () => {
+      const v = document.getElementById("password").value;
+      const password = generatePassword();
+
+      if (v === password) {
+        window.location.replace("success.html");
+      } else {
+        window.location.replace("error.html");
+      }
+    };
+
+    window.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("go").addEventListener("click", checkPassword);
+      document.getElementById("password").addEventListener("keydown", e => {
+        if (e.keyCode === 13) {
+          checkPassword();
+        }
+      });
+    }, false);
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h2>Login</h2>
+    <input type="password" id="password" placeholder="Password">
+    <button id="go">Submit</button>
+  </div>
+</body>
+</html>
