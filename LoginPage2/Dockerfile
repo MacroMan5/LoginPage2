@@ -12,7 +12,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app.py .
 COPY error.html .
 COPY index.html .
-COPY success.html .
+COPY LoginSuccessful.html .
 
 # Expose the port on which the Flask server will run
 EXPOSE 5000

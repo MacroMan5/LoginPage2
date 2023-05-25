@@ -35,15 +35,15 @@ def login():
     # compare the submitted password with the current valid one
     if submitted_password == current_password:
         #redirect to success page
-        return redirect(url_for('success'))
+        return redirect(url_for('LoginSuccessful'))
     else:
         # redirect to error page
         return redirect(url_for('error'))
         
     
-@app.route('/success')
-def success():
-    return render_template('success.html')
+@app.route('/LoginSuccessful')
+def LoginSuccessful():
+    return render_template('LoginSuccessful.html')
 
 @app.route('/error')
 def error():
